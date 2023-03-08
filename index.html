@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>filter items</title>
+    <style>
+      .container {
+        width: 70%;
+        background-color: indigo;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 1rem;
+        max-width: 500px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      input {
+        width: 80%;
+        max-width: 400px;
+        padding: 0.5rem;
+        outline: 0;
+        border: 1px solid blueviolet;
+        border-radius: 0.5rem;
+        border: 0;
+      }
+      .product-list {
+        width: 80%;
+        max-width: 400px;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" />
+      <div class="product-list"></div>
+    </div>
+    <script>
+      const products = [
+        { title: "node js course" },
+        { title: "react.js course" },
+        { title: "advance javascript (js) course" },
+        { title: "git-git hub course" },
+      ];
+
+      const input = document.querySelector("input");
+      const productList = document.querySelector(".product-list");
+
+      let filters = "";
+
+      function filteredItems(_products, _filters) {
+        const filteredProducts = _products.filter(function (filter) {
+          return filter.title.toLowerCase().includes(_filters.toLowerCase());
+        });
+
+        productList.innerHTML = "";
+
+        filteredProducts.forEach((element) => {
+          let tag = document.createElement("p");
+          tag.innerHTML = element.title;
+          productList.appendChild(tag);
+        });
+      }
+
+      filteredItems(products, filters);
+
+      input.addEventListener("input", (e) => {
+        filters = e.target.value;
+        filteredItems(products, filters);
+      });
+    </script>
+  </body>
+</html>
